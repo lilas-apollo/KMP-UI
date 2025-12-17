@@ -1,0 +1,431 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "KMP Mock API",
+    "description": "Mock API specification for the KMP Frontend assignment. Implement these endpoints using MSW, Next.js API routes, or static JSON files.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "/api",
+      "description": "Local mock server"
+    }
+  ],
+  "paths": {
+    "/categories": {
+      "get": {
+        "summary": "List all categories",
+        "operationId": "getCategories",
+        "responses": {
+          "200": {
+            "description": "List of categories",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Category"
+                  }
+                },
+                "example": [
+                  { "id": "1", "name": "Finance", "documentCount": 234 },
+                  { "id": "2", "name": "HR", "documentCount": 189 },
+                  { "id": "3", "name": "Engineering", "documentCount": 156 },
+                  { "id": "4", "name": "Legal", "documentCount": 89 },
+                  { "id": "5", "name": "Marketing", "documentCount": 67 }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/departments": {
+      "get": {
+        "summary": "List all departments",
+        "operationId": "getDepartments",
+        "responses": {
+          "200": {
+            "description": "List of departments",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Department"
+                  }
+                },
+                "example": [
+                  { "id": "dept-1", "name": "Finance Department" },
+                  { "id": "dept-2", "name": "Human Resources" },
+                  { "id": "dept-3", "name": "Engineering" },
+                  { "id": "dept-4", "name": "Legal & Compliance" },
+                  { "id": "dept-5", "name": "Marketing & Sales" }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tags": {
+      "get": {
+        "summary": "List or search tags",
+        "operationId": "getTags",
+        "parameters": [
+          {
+            "name": "search",
+            "in": "query",
+            "description": "Filter tags by search term",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "Maximum number of tags to return",
+            "schema": {
+              "type": "integer",
+              "default": 20
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of tags",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Tag"
+                  }
+                },
+                "example": [
+                  { "id": "tag-1", "name": "quarterly", "count": 89 },
+                  { "id": "tag-2", "name": "annual", "count": 67 },
+                  { "id": "tag-3", "name": "budget", "count": 45 },
+                  { "id": "tag-4", "name": "report", "count": 234 },
+                  { "id": "tag-5", "name": "policy", "count": 56 }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/documents": {
+      "post": {
+        "summary": "Upload a document with metadata",
+        "operationId": "createDocument",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/DocumentUploadRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Document created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DocumentUploadResponse"
+                },
+                "example": {
+                  "id": "doc-new-123",
+                  "title": "Q4 Financial Report",
+                  "message": "Document uploaded successfully"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Validation failed",
+                  "details": {
+                    "title": "Title is required",
+                    "file": "File size exceeds 50MB limit"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search": {
+      "post": {
+        "summary": "Search documents",
+        "operationId": "searchDocuments",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Search results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Category": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "documentCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "Department": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "required": ["id", "name"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "count": {
+            "type": "integer",
+            "description": "Number of documents with this tag"
+          }
+        }
+      },
+      "DocumentUploadRequest": {
+        "type": "object",
+        "required": ["file", "title", "categoryId", "departmentId"],
+        "properties": {
+          "file": {
+            "type": "string",
+            "format": "binary",
+            "description": "The file to upload"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "categoryId": {
+            "type": "string"
+          },
+          "departmentId": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "DocumentUploadResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchRequest": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "type": "string",
+            "description": "Search query text"
+          },
+          "filters": {
+            "type": "object",
+            "properties": {
+              "categories": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "tags": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "dateRange": {
+                "type": "object",
+                "properties": {
+                  "from": {
+                    "type": "string",
+                    "format": "date"
+                  },
+                  "to": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          },
+          "sort": {
+            "type": "object",
+            "properties": {
+              "field": {
+                "type": "string",
+                "enum": ["relevance", "date", "title"]
+              },
+              "order": {
+                "type": "string",
+                "enum": ["asc", "desc"]
+              }
+            }
+          },
+          "page": {
+            "type": "integer",
+            "default": 1
+          },
+          "pageSize": {
+            "type": "integer",
+            "default": 20
+          }
+        }
+      },
+      "SearchResponse": {
+        "type": "object",
+        "properties": {
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchResult"
+            }
+          },
+          "pagination": {
+            "type": "object",
+            "properties": {
+              "page": {
+                "type": "integer"
+              },
+              "pageSize": {
+                "type": "integer"
+              },
+              "totalResults": {
+                "type": "integer"
+              },
+              "totalPages": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      },
+      "SearchResult": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "highlights": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Title with matched terms wrapped in <em> tags"
+              },
+              "description": {
+                "type": "string",
+                "description": "Description excerpt with matched terms wrapped in <em> tags"
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string"
+          },
+          "details": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}

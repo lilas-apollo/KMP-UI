@@ -1,0 +1,7 @@
+[
+    { "id": "1", "name": "Finance", "documentCount": 234 },
+    { "id": "2", "name": "HR", "documentCount": 189 },
+    { "id": "3", "name": "Engineering", "documentCount": 156 },
+    { "id": "4", "name": "Legal", "documentCount": 89 },
+    { "id": "5", "name": "Marketing", "documentCount": 67 }
+  ]

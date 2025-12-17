@@ -1,0 +1,75 @@
+[
+  {
+    "id": "doc-1",
+    "title": "Q4 Financial Report",
+    "description": "Quarterly financial summary including revenue, expenses, and projections for the upcoming quarter.",
+    "category": "Finance",
+    "tags": ["quarterly", "financial", "2024"],
+    "createdAt": "2024-10-15T10:30:00Z",
+    "highlights": {
+      "title": "Q4 <em>Financial</em> Report",
+      "description": "Quarterly <em>financial</em> summary including revenue..."
+    }
+  },
+  {
+    "id": "doc-2",
+    "title": "Marketing Plan 2024",
+    "description": "Detailed marketing plan with campaigns, targets, and KPIs for 2024.",
+    "category": "Marketing",
+    "tags": ["marketing", "2024", "campaigns"],
+    "createdAt": "2024-01-10T09:00:00Z",
+    "highlights": {
+      "title": "Marketing <em>Plan</em> 2024",
+      "description": "Detailed <em>marketing</em> plan with campaigns..."
+    }
+  },
+  {
+    "id": "doc-3",
+    "title": "Q4 Quality Report",
+    "description": "Quarterly quality summary including revenue, expenses, and projections for the upcoming quarter.",
+    "category": "Quality",
+    "tags": ["quarterly", "quality", "2024"],
+    "createdAt": "2024-10-15T10:30:00Z",
+    "highlights": {
+      "title": "Q4 <em>Quality</em> Report",
+      "description": "Quarterly <em>quality</em> summary including revenue..."
+    }
+  },
+
+  {
+    "id": "doc-4",
+    "title": "Q4 Financial Report1234",
+    "description": "Quarterly financial summary including revenue, expenses, and projections for the upcoming 1234.",
+    "category": "Finance",
+    "tags": ["quarterly", "financial", "2024"],
+    "createdAt": "2024-10-15T10:30:00Z",
+    "highlights": {
+      "title": "Q4 <em>Financial</em> Report",
+      "description": "Quarterly <em>financial</em> summary including revenue..."
+    }
+  },
+  {
+    "id": "doc-5",
+    "title": "Marketing 1234",
+    "description": "Detailed marketing plan with campaigns, targets, and KPIs 1234.",
+    "category": "Marketing",
+    "tags": ["marketing", "2024", "campaigns"],
+    "createdAt": "2024-01-10T09:00:00Z",
+    "highlights": {
+      "title": "Marketing <em>Plan</em> 2024",
+      "description": "Detailed <em>marketing</em> plan with campaigns..."
+    }
+  },
+  {
+    "id": "doc-6",
+    "title": "Q4 Quality 1234",
+    "description": "Quarterly quality summary including revenue, expenses, and projections for the upcoming 1234.",
+    "category": "Quality",
+    "tags": ["quarterly", "quality", "2024"],
+    "createdAt": "2024-10-15T10:30:00Z",
+    "highlights": {
+      "title": "Q4 <em>Quality</em> Report",
+      "description": "Quarterly <em>quality</em> summary including revenue..."
+    }
+  }
+]

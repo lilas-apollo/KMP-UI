@@ -1,0 +1,7 @@
+[
+    { "id": "dept-1", "name": "Finance Department" },
+    { "id": "dept-2", "name": "Human Resources" },
+    { "id": "dept-3", "name": "Engineering" },
+    { "id": "dept-4", "name": "Legal & Compliance" },
+    { "id": "dept-5", "name": "Marketing & Sales" }
+  ]
